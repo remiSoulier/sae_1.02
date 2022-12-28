@@ -19,7 +19,15 @@ public class RelationBinaire {
      action : construit la relation binaire vide dans l'ensemble {0,1,2, ..., nb-1}
      */
     public RelationBinaire(int nb){
-
+        this.n=nb;
+        this.matAdj = new boolean[nb][nb];
+        for (int i=0; i<nb; i++) {
+            for (int j=0; j<nb; j++) {
+                this.matAdj[i][j]=false;
+            }
+        }
+        this.m=0;
+        this.tabSucc = new EE[1];
     }
 
     //______________________________________________
@@ -32,7 +40,31 @@ public class RelationBinaire {
      Indication : Math.random() retourne un réel de type double aléatoire de l'intervalle [0,1[
      */
     public RelationBinaire(int nb,double p){
-
+        this(nb);
+        if (p==1) {
+            for (int i=0; i<nb; i++) {
+                for (int j=0; j<nb; j++) {
+                    this.matAdj[i][j]=true;
+                    this.m++;
+                    this.tabSucc[i].ajoutElt(j);
+                }
+            }
+        }
+        else {
+            for (int i=0; i<nb; i++) {
+                for (int j=0; j<nb; j++) {
+                    double d = Math.random();
+                    if (d<=p) {
+                        this.matAdj[i][j]=true;
+                        this.m++;
+                        this.tabSucc[i].ajoutElt(j);
+                    }
+                    else {
+                        this.matAdj[i][j]=false;
+                    }
+                }
+            }
+        }
     }
 
     //______________________________________________
