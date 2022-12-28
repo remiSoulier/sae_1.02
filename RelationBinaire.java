@@ -379,7 +379,15 @@ public class RelationBinaire {
      résultat : vrai ssi this est symétrique
      */
     public boolean estSymetrique(){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        boolean sym = true;
+        for (int i =0;i<this.matAdj.length;i++){
+            for (int j =0;j<this.matAdj[i].length;j++){
+                if (this.matAdj[i][j]!=this.matAdj[j][i]){
+                    sym=false;
+                }
+            }
+        }
+        return sym;
     }
 
     //______________________________________________
