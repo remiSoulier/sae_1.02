@@ -346,7 +346,14 @@ public class RelationBinaire {
      résultat : vrai ssi this est réflexive
      */
     public boolean estReflexive(){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        boolean reflex = true ;
+        for (int i=0;i < this.matAdj.length;i++){
+            if( this.matAdj[i][i] != true){
+                reflex=false;
+            }
+        }
+        return reflex;
+
     }
 
     //______________________________________________
