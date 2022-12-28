@@ -397,7 +397,15 @@ public class RelationBinaire {
      résultat : vrai ssi this est antisymétrique
      */
     public boolean estAntisymetrique(){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        boolean Asym = true;
+        for (int i =0;i<this.matAdj.length;i++){
+            for (int j =0;j<this.matAdj[i].length;j++){
+                if ((this.matAdj[i][j]==this.matAdj[j][i])&&(i!=j)){
+                    Asym=false;
+                }
+            }
+        }
+        return Asym;
     }
 
     //______________________________________________
