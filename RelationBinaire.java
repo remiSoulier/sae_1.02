@@ -90,6 +90,14 @@ public class RelationBinaire {
 
      */
     public RelationBinaire(boolean[][] mat){
+        this(mat.length);
+        for (int i=0; i<mat.length; i++) {
+            for (int j=0; j<mat.length; j++) {
+                this.matAdj[i][j] = mat[i][j];
+                this.m++;
+                this.tabSucc[i].ajoutElt(j);
+            }
+        }
 
     }
 
@@ -102,7 +110,7 @@ public class RelationBinaire {
      est une copie de tab
      */
     public RelationBinaire(EE[] tab){
-
+        
     }
 
     //______________________________________________
@@ -112,7 +120,13 @@ public class RelationBinaire {
      action : construit une copie de r
      */
     public RelationBinaire(RelationBinaire r){
-
+        this(r.n);
+        for (int i=0; i<this.n; i++) {
+            for (int j=0; j<this.n; j++) {
+                this.matAdj[i][j] = r.matAdj[i][j];
+                this.m++;
+                this.tabSucc[i].ajoutElt(j);
+            }
     }
 
 
