@@ -385,7 +385,14 @@ public class RelationBinaire {
      résultat : vrai ssi this est réflexive
      */
     public boolean estReflexive(){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        boolean reflex = true ;
+        for (int i=0;i < this.matAdj.length;i++){
+            if( this.matAdj[i][i] != true){
+                reflex=false;
+            }
+        }
+        return reflex;
+
     }
 
     //______________________________________________
@@ -395,7 +402,13 @@ public class RelationBinaire {
      résultat : vrai ssi this est antiréflexive
      */
     public boolean estAntireflexive(){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        boolean antiReflex = true ;
+        for (int i=0;i < this.matAdj.length;i++){
+            if( this.matAdj[i][i] != false){
+                antiReflex=false;
+            }
+        }
+        return antiReflex;
     }
 
     //______________________________________________
@@ -405,7 +418,15 @@ public class RelationBinaire {
      résultat : vrai ssi this est symétrique
      */
     public boolean estSymetrique(){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        boolean sym = true;
+        for (int i =0;i<this.matAdj.length;i++){
+            for (int j =0;j<this.matAdj[i].length;j++){
+                if (this.matAdj[i][j]!=this.matAdj[j][i]){
+                    sym=false;
+                }
+            }
+        }
+        return sym;
     }
 
     //______________________________________________
@@ -415,7 +436,15 @@ public class RelationBinaire {
      résultat : vrai ssi this est antisymétrique
      */
     public boolean estAntisymetrique(){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        boolean Asym = true;
+        for (int i =0;i<this.matAdj.length;i++){
+            for (int j =0;j<this.matAdj[i].length;j++){
+                if ((this.matAdj[i][j]==this.matAdj[j][i])&&(i!=j)){
+                    Asym=false;
+                }
+            }
+        }
+        return Asym;
     }
 
     //______________________________________________
