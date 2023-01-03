@@ -76,7 +76,23 @@ public class RelationBinaire {
      '=' si egal a la valeur vrai et '<=' sinon
      */
     public RelationBinaire(int nb, boolean egal){
-
+        this(nb);
+        for (int i=0; i<nb; i++) {
+            this.matAdj[i][i]=true;
+            this.m++;
+            this.tabSucc[i].ajoutElt(i);
+        }
+        if (!egal) {
+            for (int i=0; i<nb; i++) {
+                for (int j=0; j<nb; j++) {
+                    if (i<j) {
+                        this.matAdj[j][i]=true;
+                        this.m++;
+                        this.tabSucc[j].ajoutElt(i);
+                    }
+                }
+            }
+        }
     }
 
     //______________________________________________
@@ -110,7 +126,16 @@ public class RelationBinaire {
      est une copie de tab
      */
     public RelationBinaire(EE[] tab){
-        
+        this(tab.length);
+        for (int i=0; i<this.n; i++) {
+            this.tabSucc[i]=tab[i];
+            this.m+=tab[i].getCardinal();
+            for (int j=0; j<this.n; j++) {
+                if (this.tabSucc[i].contient(j)) {
+                    this.matAdj[i][j]=true;
+                }
+            }
+        }
     }
 
     //______________________________________________
