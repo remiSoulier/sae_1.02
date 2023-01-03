@@ -2,7 +2,7 @@ import java.util.*;
 import java.lang.*;
 
 
-public class RelationBinaire {
+public class  RelationBinaire {
 
     // attributs
     //DERNIERE MODIF GH 16/12
@@ -128,7 +128,19 @@ public class RelationBinaire {
      en extension (ensemble de couples {(..,..),(..,..), ...})
      */
     public String toString(){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        String result="matrice d'adjacence : \n";
+        for ( int i=0;i<this.matAdj.length;i++){
+            for (int j=0;j<this.matAdj[i].length;j++){
+                if (this.matAdj[i][j]){
+                    result = result + "1" +",";
+                }
+                else {
+                    result = result + '0' +",";
+                }
+            }
+            result = result + "\n";
+        }
+        return result;
     }
 
     //______________________________________________
@@ -415,7 +427,13 @@ public class RelationBinaire {
      résultat : vrai ssi this est transitive
      */
     public boolean estTransitive(){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        //throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        boolean trans = true ;
+        if (this.estSymetrique()&this.estAntireflexive()){
+            trans = false;
+        }
+
+        return trans;
     }
 
     //______________________________________________
