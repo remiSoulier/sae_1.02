@@ -15,6 +15,16 @@ public class test {
             }
             result = result + "\n";
         }
+        result += "\ncouples : {";
+        for (int i=0;i<t.length;i++){
+            for (int j=0;j<t[i].length;j++){
+                if (t[i][j]){
+                    result += "("+(i+1)+","+(j+1)+")";
+                }
+            }
+            result += ",";
+        }
+        result += "}";
         System.out.println(result);
     }
 }

@@ -179,6 +179,16 @@ public class  RelationBinaire {
             }
             result = result + "\n";
         }
+        result += "\ncouples : {";
+        for (int i=0;i<this.matAdj.length;i++){
+            for (int j=0;j<this.matAdj[i].length;j++){
+                if (this.matAdj[i][j]){
+                    result += "("+i+","+j+")";
+                }
+            }
+            result += ",";
+        }
+        result += "}";
         return result;
     }
 
@@ -197,7 +207,7 @@ public class  RelationBinaire {
      "implique"et "equivalent" sont numérotés de 1 à 5 dans cet ordre
      */
 
-    public static boolean[][] opBool(boolean[][] m1, boolean[][] m2, int numConnecteur)
+    public static boolean[][] opBool(boolean[][] m1, boolean[][] m2,int numConnecteur)
 
     {
         throw new RuntimeException("La fonction n'est pas encore implémentée !");
