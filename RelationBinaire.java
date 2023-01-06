@@ -306,7 +306,14 @@ public class  RelationBinaire {
          résultat : vrai ssi this est vide
          */
         public boolean estVide(){
-            throw new RuntimeException("La fonction n'est pas encore implémentée !");
+            for (int i=0; i<this.n; i++) {
+                for (int j=0; j<this.n; j++) {
+                    if (this.matAdj[i][j]==true) {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         //______________________________________________
@@ -316,7 +323,14 @@ public class  RelationBinaire {
          résultat : vrai ssi this est pleinee (contient tous les couples d'éléments de E)
          */
         public boolean estPleine(){
-            throw new RuntimeException("La fonction n'est pas encore implémentée !");
+            for (int i=0; i<this.n; i++) {
+                for (int j=0; j<this.n; j++) {
+                    if (this.matAdj[i][j]==false) {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         //______________________________________________
@@ -325,7 +339,10 @@ public class  RelationBinaire {
          résultat : vrai ssi (x,y) appartient à this
          */
         public boolean appartient(int x, int y){
-            throw new RuntimeException("La fonction n'est pas encore implémentée !");
+            if (this.matAdj[x][y]==false) {
+                return false;
+            }
+            return true;
         }
 
         //______________________________________________
@@ -335,7 +352,9 @@ public class  RelationBinaire {
          résultat : ajoute (x,y) à this s'il n'y est pas déjà
          */
         public void ajouteCouple(int x, int y){
-
+            this.tabSucc[x].ajoutElt(y);
+            this.matAdj[x][y]=true;
+            this.m++;
         }
 
         //______________________________________________
@@ -345,7 +364,9 @@ public class  RelationBinaire {
          résultat : enlève (x,y) de this s'il y est
          */
         public void enleveCouple(int x, int y){
-
+            this.tabSucc[x].retraitElt(y);
+            this.matAdj[x][y]=false;
+            this.m--;
         }
 
         //______________________________________________
@@ -356,8 +377,11 @@ public class  RelationBinaire {
          les couples de la forme  (x,x) qui n'y sont pas déjà
          */
         public RelationBinaire avecBoucles(){
-
-            throw new RuntimeException("La fonction n'est pas encore implémentée !");
+            for (int i=0; i<this.n; i++) {
+                if (!this.matAdj[i][i]) {
+                    this.ajouteCouple(i, i);
+                }
+            }
         }
         //______________________________________________
 
@@ -368,7 +392,11 @@ public class  RelationBinaire {
          //DERNIERE MODIF
          */
         public RelationBinaire sansBoucles(){
-            throw new RuntimeException("La fonction n'est pas encore implémentée !");
+            for (int i=0; i<this.n; i++) {
+                if (this.matAdj[i][i]) {
+                    this.enleveCouple(i, i);
+                }
+            }
         }
 
         //______________________________________________
@@ -378,7 +406,14 @@ public class  RelationBinaire {
          résultat : l'union de this et r
          */
         public RelationBinaire union(RelationBinaire r){
-            throw new RuntimeException("La fonction n'est pas encore implémentée !");
+            for (int i=0; i<this.n; i++) {
+                for (int j=0; j<this.n; j++) {
+                    if (this.matAdj[i][j] || r.matAdj[i][j]) {
+                        r.matAdj[i][j]=true;
+                    }
+                }
+            }
+            return r;
         }
 
         //______________________________________________
@@ -388,7 +423,14 @@ public class  RelationBinaire {
          résultat : l'intersection de this et r
          */
         public RelationBinaire intersection(RelationBinaire r){
-            throw new RuntimeException("La fonction n'est pas encore implémentée !");
+            for (int i=0; i<this.n; i++) {
+                for (int j=0; j<this.n; j++) {
+                    if (!this.matAdj[i][j] || !r.matAdj[i][j]) {
+                        r.matAdj[i][j]=false;
+                    }
+                }
+            }
+            return r;
         }
 
         //______________________________________________
@@ -399,7 +441,13 @@ public class  RelationBinaire {
          résultat : la relation complémentaire de this
          */
         public RelationBinaire complementaire(){
-            throw new RuntimeException("La fonction n'est pas encore implémentée !");
+            RelationBinaire r = this;
+            for (int i=0; i<this.n; i++) {
+                for (int j=0; j<this.n; j++) {
+                    r.matAdj[i][j]=!this.matAdj[i][j];
+                }
+            }
+            return r;
         }
 
         //______________________________________________
@@ -578,9 +626,7 @@ public class  RelationBinaire {
                     if (this.tabSucc[i].contient(j)) {
                         for (int k=0; k<this.tabSucc.length; k++) {
                             if (this.tabSucc[j].contient(k) && this.tabSucc[i].contient(k)) {
-                                rb.tabSucc[j].retraitElt(k);
-                                rb.matAdj[j][k]=false;
-                                rb.m--;
+                                rb.enleveCouple(j, k);
                             }
                         }
                     }
@@ -602,9 +648,7 @@ public class  RelationBinaire {
                         if (this.tabSucc[i].contient(j)) {
                             for (int k=0; k<rbfermetureTransitive.tabSucc.length; k++) {
                                 if (rbfermetureTransitive.tabSucc[j].contient(k) && !rbfermetureTransitive.tabSucc[i].contient(k)) {
-                                    rbfermetureTransitive.tabSucc[i].ajoutElt(k);
-                                    rbfermetureTransitive.matAdj[i][k]=true;
-                                    rbfermetureTransitive.m++;
+                                    rbfermetureTransitive.ajouteCouple(i, k);
                                 }
                             }
                         }
