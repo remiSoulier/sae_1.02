@@ -144,16 +144,16 @@ public class  RelationBinaire {
     /** pré-requis : aucun
      action : construit une copie de r
      */
-    public RelationBinaire(RelationBinaire r){
+    public RelationBinaire(RelationBinaire r) {
         this(r.n);
-        for (int i=0; i<this.n; i++) {
-            for (int j=0; j<this.n; j++) {
+        for (int i = 0; i < this.n; i++) {
+            for (int j = 0; j < this.n; j++) {
                 this.matAdj[i][j] = r.matAdj[i][j];
                 this.m++;
                 this.tabSucc[i].ajoutElt(j);
             }
         }
-
+    }
 
         //______________________________________________
 
