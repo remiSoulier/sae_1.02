@@ -267,7 +267,15 @@ public class  RelationBinaire {
          résultat : le produit matriciel de m1 et m2
          */
         public static boolean[][] produit(boolean[][] m1, boolean[][] m2){
-            throw new RuntimeException("La fonction n'est pas encore implémentée !");
+            boolean[][] res = new  boolean[m1.length][m1.length];
+            int somme = 0;
+            for (int i=0;i<m1.length;i++){
+                for (int j=0;j<m1.length;j++){
+
+
+                }
+            }
+            return res;
         }
 
         //______________________________________________
@@ -277,7 +285,13 @@ public class  RelationBinaire {
          résultat : la matrice transposée de m
          */
         public static boolean[][] transposee(boolean[][] m){
-            throw new RuntimeException("La fonction n'est pas encore implémentée !");
+            boolean [][] res = new boolean[m.length][m.length];
+            for (int i=0;i<m.length;i++){
+                for (int j=0;j<m.length;i++){
+                    res [i][j] = m[j][i];
+                }
+            }
+            return res;
         }
 
         //______________________________________________
