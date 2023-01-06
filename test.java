@@ -8,37 +8,18 @@ public class test {
                         {false,true,true},
                         {false,false,false},};
 
-        boolean [][] res = new boolean[m.length][m.length];
-        for (int i=0;i<m.length;i++){
-            for (int j=0;j<m.length;i++){
-                res [i][j] = m[j][i];
-            }
-        }
 
-
-
-        String result="matrice d'adjacence : \n";
-        for ( int i=0;i<res.length;i++){
-            for (int j=0;j<res[i].length;j++){
-                if (res[i][j]){
-                    result = result + "1" +",";
-                }
-                else {
-                    result = result + '0' +",";
+        for (int i=0; i<m.length; i++) {
+            for (int j=0; j<m.length; j++) {
+                if (m[i][j]==true) {
+                    for (int k=0; k<m.length; k++) {
+                        if (m[j][k]==true && m[i][k]==false) {
+                            System.out.println("n'est pastransitive !  i = "+i+" ; j = "+j+" ; k = "+k);
+                        }
+                    }
                 }
             }
-            result = result + "\n";
         }
-        result += "\ncouples : {";
-        for (int i=0;i<res.length;i++){
-            for (int j=0;j<res[i].length;j++){
-                if (res[i][j]){
-                    result += "("+i+","+j+")";
-                }
-            }
-            result += ",";
-        }
-        result += "}";
-        System.out.println(result);
+        System.out.println("est Transitive ! ");
     }
 }

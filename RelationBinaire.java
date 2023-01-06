@@ -255,7 +255,7 @@ public class  RelationBinaire {
                 }
             }
 
-            
+
             return res;
 
         }
@@ -537,12 +537,18 @@ public class  RelationBinaire {
          */
         public boolean estTransitive(){
             //throw new RuntimeException("La fonction n'est pas encore implémentée !");
-            boolean trans = true ;
-            if (this.estSymetrique()&this.estAntireflexive()){
-                trans = false;
+            for (int i=0; i<this.tabSucc.length; i++) {
+                for (int j=0; j<this.tabSucc.length; j++) {
+                    if (this.tabSucc[i].contient(j)) {
+                        for (int k=0; k<this.tabSucc.length; k++) {
+                            if (this.tabSucc[j].contient(k) && !this.tabSucc[i].contient(k)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
             }
-
-            return trans;
+            return true;
         }
 
         //______________________________________________
