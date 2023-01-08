@@ -438,14 +438,26 @@ public class  RelationBinaire {
      (c'est-à-dire dans une autre zône mémoire) de l'attribut this.tabSucc
      */
     public EE succ(int x){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        EE succ = new EE (this.n);
+        for (int i=0; i<this.n; i++) {
+            if (this.matAdj[x][i]) {
+                succ.ajoutElt(i);
+            }
+        }
+        return succ;
     }
     //______________________________________________
     /** pré-requis : 0 <= x < this.n
      résultat : l'ensemble des prédécesseurs de x dans this
      */
     public EE pred(int x){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        EE pred = new EE (this.n);
+        for (int i=0; i<this.n; i++) {
+            if (this.tabSucc[i].contient(x)) {
+                pred.ajoutElt(i);
+            }
+        }
+        return pred;
     }
     //______________________________________________
     // D) Relation binaire
