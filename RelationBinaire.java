@@ -20,7 +20,10 @@ public class  RelationBinaire {
             }
         }
         this.m=0;
-        this.tabSucc = new EE[1];
+        this.tabSucc = new EE[nb];
+        for (int i=0; i<this.n; i++) {
+            this.tabSucc[i] = new EE(nb);
+        }
     }
     //______________________________________________
     /** pré-requis : nb > 0 et 0 <= p <= 1
@@ -91,8 +94,10 @@ public class  RelationBinaire {
         for (int i=0; i<mat.length; i++) {
             for (int j=0; j<mat.length; j++) {
                 this.matAdj[i][j] = mat[i][j];
-                this.m++;
-                this.tabSucc[i].ajoutElt(j);
+                if (this.matAdj[i][j]) {
+                    this.m++;
+                    this.tabSucc[i].ajoutElt(j);
+                }
             }
         }
     }
@@ -310,7 +315,7 @@ public class  RelationBinaire {
      les couples de la forme  (x,x) qui n'y sont pas déjà
      */
     public RelationBinaire avecBoucles(){
-        RelationBinaire r = this;
+        RelationBinaire r = new RelationBinaire(this);
         for (int i=0; i<r.n; i++) {
             if (!r.matAdj[i][i]) {
                 r.ajouteCouple(i, i);
@@ -326,7 +331,7 @@ public class  RelationBinaire {
      //DERNIERE MODIF
      */
     public RelationBinaire sansBoucles(){
-        RelationBinaire r = this;
+        RelationBinaire r = new RelationBinaire(this);
         for (int i=0; i<r.n; i++) {
             if (r.matAdj[i][i]) {
                 r.enleveCouple(i, i);
@@ -340,14 +345,7 @@ public class  RelationBinaire {
      résultat : l'union de this et r
      */
     public RelationBinaire union(RelationBinaire r){
-        for (int i=0; i<r.n; i++) {
-            for (int j=0; j<r.n; j++) {
-                if (this.matAdj[i][j] || r.matAdj[i][j]) {
-                    r.ajouteCouple(i, j);
-                }
-            }
-        }
-        return r;
+        return new RelationBinaire(opBool(this.matAdj, r.matAdj, 1));
     }
 
     //______________________________________________
@@ -355,14 +353,7 @@ public class  RelationBinaire {
      résultat : l'intersection de this et r
      */
     public RelationBinaire intersection(RelationBinaire r){
-        for (int i=0; i<r.n; i++) {
-            for (int j=0; j<r.n; j++) {
-                if (!this.matAdj[i][j] || !r.matAdj[i][j]) {
-                    r.enleveCouple(i, j);
-                }
-            }
-        }
-        return r;
+        return new RelationBinaire(opBool(this.matAdj, r.matAdj, 2));
     }
 
     //______________________________________________
@@ -370,7 +361,7 @@ public class  RelationBinaire {
      résultat : la relation complémentaire de this
      */
     public RelationBinaire complementaire(){
-        RelationBinaire r= this;
+        RelationBinaire r = new RelationBinaire(this);
         r.matAdj = opBool(this.matAdj, this.matAdj, 3);
         for (int i=0; i<r.n; i++) {
             for (int j=0; j<r.n; j++) {
@@ -555,15 +546,12 @@ public class  RelationBinaire {
      résultat : la relation binaire assiciée au diagramme de Hasse de this
      */
     public RelationBinaire hasse(){
-        RelationBinaire rb = this;
+        RelationBinaire rb = new RelationBinaire(this);
         for (int i=0; i<this.tabSucc.length; i++) {
             for (int j=0; j<this.tabSucc.length; j++) {
                 if (this.tabSucc[i].contient(j)) {
                     for (int k=0; k<this.tabSucc.length; k++) {
                         if (this.tabSucc[j].contient(k) && this.tabSucc[i].contient(k)) {
-                            rb.tabSucc[j].retraitElt(k);
-                            rb.matAdj[j][k]=false;
-                            rb.m--;
                             rb.enleveCouple(j, k);
                         }
                     }
@@ -577,7 +565,7 @@ public class  RelationBinaire {
      résultat : la fermeture transitive de this
      */
     public RelationBinaire ferTrans(){
-        RelationBinaire rbfermetureTransitive = this;
+        RelationBinaire rbfermetureTransitive = new RelationBinaire(this);
         while (!this.estTransitive()) {
             for (int i=0; i<rbfermetureTransitive.tabSucc.length; i++) {
                 for (int j=0; j<rbfermetureTransitive.tabSucc.length; j++) {
@@ -635,5 +623,10 @@ public class  RelationBinaire {
             nb = Ut.saisirEntier();
         }
         while (nb <= 0);
+        boolean[][] tamere = new boolean[][] {{false,false,true,true},{true,false,true,true},{false,false,true,true},{false,false,true,true}};
+        boolean[][] tasoeur = new boolean[][] {{false,false,true,true},{true,false,true,false},{false,true,true,false},{true,true,true,true}};
+        RelationBinaire b = new RelationBinaire(tamere);
+        RelationBinaire a = new RelationBinaire(tasoeur);
+        System.out.println(b.union(a).toString());
     }
 } // fin RelationBinaire
