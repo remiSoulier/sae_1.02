@@ -584,9 +584,6 @@ public class  RelationBinaire {
                     if (this.tabSucc[i].contient(j)) {
                         for (int k=0; k<rbfermetureTransitive.tabSucc.length; k++) {
                             if (rbfermetureTransitive.tabSucc[j].contient(k) && !rbfermetureTransitive.tabSucc[i].contient(k)) {
-                                rbfermetureTransitive.tabSucc[i].ajoutElt(k);
-                                rbfermetureTransitive.matAdj[i][k]=true;
-                                rbfermetureTransitive.m++;
                                 rbfermetureTransitive.ajouteCouple(i, k);
                             }
                         }
