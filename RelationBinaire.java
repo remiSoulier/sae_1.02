@@ -248,7 +248,6 @@ public class  RelationBinaire {
      résultat : vrai ssi this est vide
      */
     public boolean estVide(){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
         for (int i=0; i<this.n; i++) {
             for (int j=0; j<this.n; j++) {
                 if (this.matAdj[i][j]) {
@@ -264,7 +263,6 @@ public class  RelationBinaire {
      résultat : vrai ssi this est pleinee (contient tous les couples d'éléments de E)
      */
     public boolean estPleine(){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
         for (int i=0; i<this.n; i++) {
             for (int j=0; j<this.n; j++) {
                 if (!this.matAdj[i][j]) {
@@ -479,7 +477,7 @@ public class  RelationBinaire {
      */
     public boolean estAntireflexive(){
         for (int i=0;i < this.matAdj.length;i++){
-            if( this.matAdj[i][i] != false){
+            if(this.matAdj[i][i]){
                 return false;
             }
         }
