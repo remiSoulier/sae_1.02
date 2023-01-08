@@ -472,7 +472,7 @@ public class  RelationBinaire {
      */
     public boolean estReflexive(){
         for (int i=0;i < this.matAdj.length;i++){
-            if( this.matAdj[i][i] != true){
+            if(!this.matAdj[i][i]){
                 return false;
             }
         }
