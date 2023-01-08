@@ -412,7 +412,14 @@ public class  RelationBinaire {
      résultat : vrai ssi this est incluse dans r
      */
     public boolean estIncluse(RelationBinaire r){
-        throw new RuntimeException("La fonction n'est pas encore implémentée !");
+        for (int i=0; i<this.n; i++) {
+            for (int j=0; j<this.n; j++) {
+                if (this.matAdj[i][j]&&!r.matAdj[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     //______________________________________________
     /** pré-requis : this.n = r.n
