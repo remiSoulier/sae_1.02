@@ -250,7 +250,7 @@ public class  RelationBinaire {
     public static boolean[][] transposee(boolean[][] m){
         boolean [][] res = new boolean[m.length][m.length];
         for (int i=0;i<m.length;i++){
-            for (int j=0;j<m.length;i++){
+            for (int j=0;j<m.length;j++){
                 res [i][j] = m[j][i];
             }
         }
