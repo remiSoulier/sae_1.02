@@ -226,10 +226,20 @@ public class  RelationBinaire {
      */
     public static boolean[][] produit(boolean[][] m1, boolean[][] m2){
         boolean[][] res = new  boolean[m1.length][m1.length];
-        int somme = 0;
         for (int i=0;i<m1.length;i++){
             for (int j=0;j<m1.length;j++){
+                res[i][j]=false;
             }
+        }
+        for (int i=0;i<m1.length;i++){
+            for (int j=0;j<m1.length;j++){
+                for (int k=0;k<m1.length;k++){
+
+                    res[i][j]= res[i][j] || (m1[i][k] && m2[j][k]);
+                }
+
+            }
+
         }
         return res;
     }
