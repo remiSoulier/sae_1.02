@@ -371,18 +371,13 @@ public class  RelationBinaire {
      résultat : la relation complémentaire de this
      */
     public RelationBinaire complementaire(){
-        RelationBinaire r = new RelationBinaire(this);
-        r.matAdj = opBool(this.matAdj, this.matAdj, 3);
-        for (int i=0; i<r.n; i++) {
-            for (int j=0; j<r.n; j++) {
-                if (appartient(i, j)) {
-                    r.ajouteCouple(i, j);
-                }
-                else {
-                    r.enleveCouple(i, j);
-                }
-            }
-        }
+        boolean[][] res= new boolean[this.matAdj.length][this.matAdj.length];
+		for(int i=0;i<res.length;i++){
+			for(int j=0;j<res.length;j++){
+				res[i][j]= !this.matAdj[i][j];
+			}
+		}
+		RelationBinaire r = new RelationBinaire(res);
         return r;
     }
 
