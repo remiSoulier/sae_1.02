@@ -570,21 +570,20 @@ public class  RelationBinaire {
      résultat : la fermeture transitive de this
      */
     public RelationBinaire ferTrans(){
-        RelationBinaire rbfermetureTransitive = new RelationBinaire(this);
-        while (!this.estTransitive()) {
-            for (int i=0; i<rbfermetureTransitive.tabSucc.length; i++) {
-                for (int j=0; j<rbfermetureTransitive.tabSucc.length; j++) {
-                    if (this.tabSucc[i].contient(j)) {
-                        for (int k=0; k<rbfermetureTransitive.tabSucc.length; k++) {
-                            if (rbfermetureTransitive.tabSucc[j].contient(k) && !rbfermetureTransitive.tabSucc[i].contient(k)) {
-                                rbfermetureTransitive.ajouteCouple(i, k);
+
+        RelationBinaire ferTrans = new RelationBinaire(this);
+        for(int i = 0; i < this.tabSucc.length; i++) {
+            for(int j = 0; j < this.tabSucc.length; j++) {
+                if(this.tabSucc[i].contient(j)) {
+                    for(int k = 0; k < this.tabSucc.length; k++) {
+                        if(this.tabSucc[j].contient(k) && !this.tabSucc[i].contient(k)) {
+                                ferTrans.ajouteCouple(i, k);
                             }
                         }
                     }
                 }
             }
-        }
-        return rbfermetureTransitive;
+        return ferTrans;
     }
     //______________________________________________
     /** pré-requis : aucun
@@ -618,20 +617,5 @@ public class  RelationBinaire {
         this.hasse().ferTrans().toString();
         System.out.println(" \n Fermeture transitive de Hasse avec boucles : ");
         this.hasse().ferTrans().avecBoucles().toString();
-    }
-    //______________________________________________
-    public static void main(String[] args) {
-        int nb;
-        double p;
-        do {
-            Ut.afficher("\nDonner le cardinal de E (>0) : ");
-            nb = Ut.saisirEntier();
-        }
-        while (nb <= 0);
-        boolean[][] tamere = new boolean[][] {{false,false,true,true},{true,false,true,true},{false,false,true,true},{false,false,true,true}};
-        boolean[][] tasoeur = new boolean[][] {{false,false,true,true},{true,false,true,false},{false,true,true,false},{true,true,true,true}};
-        RelationBinaire b = new RelationBinaire(tamere);
-        RelationBinaire a = new RelationBinaire(tasoeur);
-        System.out.println(b.union(a).toString());
     }
 } // fin RelationBinaire
